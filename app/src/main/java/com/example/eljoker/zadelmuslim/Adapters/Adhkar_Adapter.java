@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.eljoker.zadelmuslim.Azkar_View_Pager;
-import com.example.eljoker.zadelmuslim.Models.azkar_model;
+import com.example.eljoker.zadelmuslim.Models.AzkarModel;
+import com.example.eljoker.zadelmuslim.Models.LeafNode;
+import com.example.eljoker.zadelmuslim.Models.SubNode;
 import com.example.eljoker.zadelmuslim.R;
 
 import java.util.ArrayList;
@@ -19,10 +21,10 @@ import java.util.ArrayList;
 public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder>
 {
     Context cnx;
-    ArrayList<azkar_model> arrayList;
+    ArrayList<AzkarModel> arrayList;
 
 
-    public Adhkar_Adapter(Context cnx, ArrayList<azkar_model> arrayList)
+    public Adhkar_Adapter(Context cnx, ArrayList<AzkarModel> arrayList)
     {
         this.cnx = cnx;
         this.arrayList = arrayList;
@@ -41,8 +43,8 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
     @Override
     public void onBindViewHolder(@NonNull final MyHolder viewHolder, final int position)
     {
-        final azkar_model azkar_model = arrayList.get(position);
-        viewHolder.azkar_txt.setText(azkar_model.getItems());
+        final AzkarModel azkar_model = arrayList.get(position);
+        viewHolder.azkar_txt.setText(azkar_model.getName());
         viewHolder.azkar_favorite_border_img.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -74,18 +76,12 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
             {
 
                 Intent intent = new Intent(cnx, Azkar_View_Pager.class);
-                String id = azkar_model.getId();
-                String name = azkar_model.getItems();
-                String value = azkar_model.getValue();
-                String desc = azkar_model.getDescription();
-                String itiration = azkar_model.getIteration();
-                //int leafNode = azkar_model.getLeafNode();
-                intent.putExtra("id", id);
-                intent.putExtra("name", name);
-                intent.putExtra("value", value);
-                intent.putExtra("desc", desc);
-                intent.putExtra("itiration", itiration);
-                //intent.putExtra("leafNode", leafNode);
+                LeafNode leafNode = new LeafNode();
+                intent.putExtra("name", azkar_model.getName());
+                intent.putExtra("value", leafNode.getValue());
+                intent.putExtra("desc", leafNode.getDescription());
+                SubNode subNode = new SubNode();
+                intent.putExtra("itiration", subNode.getIteration());
                 cnx.startActivity(intent);
             }
         });

@@ -14,16 +14,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
-
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import com.example.eljoker.zadelmuslim.Adapters.Adhkar_Adapter;
-import com.example.eljoker.zadelmuslim.Models.azkar_model;
+import com.example.eljoker.zadelmuslim.Models.AzkarModel;
+import com.example.eljoker.zadelmuslim.Models.LeafNode;
+import com.example.eljoker.zadelmuslim.Models.SubNode;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,26 +44,11 @@ public class Azkar_Main extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.azkar_main);
 
-/*
-        nView = findViewById(R.id.nView);
-        drawerLayout = findViewById(R.id.Drawer);
-        drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,
-                R.string.open_Drawer,
-                R.string.close_Drawer);
-
-        drawerLayout.addDrawerListener(drawerToggle);
-        //drawerToggle.setDrawerIndicatorEnabled(false);
-        drawerToggle.setHomeAsUpIndicator(R.drawable.toogle_btn);
-        drawerToggle.syncState();
-        setupDrawerContent(nView);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-*/
         rv = findViewById(R.id.azkar_rv);
 
         //parse data
         //get Azkar Name From Json
-        ArrayList<azkar_model> arrayList = new ArrayList<>();
+        ArrayList<AzkarModel> arrayList = new ArrayList<>();
         String json = null;
         try
         {
@@ -89,9 +69,9 @@ public class Azkar_Main extends AppCompatActivity
             for (int i = 0; i < jsonArray.length(); i ++)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                azkar_model azkar_model = new azkar_model();
-                azkar_model.setItems(jsonObject.getString("name"));
-                azkar_model.setId(jsonObject.getString("id"));
+                AzkarModel azkar_model = new AzkarModel();
+                azkar_model.setName(jsonObject.getString("name"));
+                azkar_model.setId(jsonObject.getInt("id"));
 
                 JSONArray array = jsonObject.getJSONArray("subNodes");
                 int y = array.length();
@@ -99,10 +79,12 @@ public class Azkar_Main extends AppCompatActivity
                 {
                     JSONObject object = array.getJSONObject(x);
                     JSONObject obj = object.getJSONObject("leafNode");
-                    azkar_model.setValue(obj.getString("value"));
-                    azkar_model.setDescription(obj.getString("description"));
-                    azkar_model.setIteration(object.getString("iteration"));
-                    azkar_model.setLeafNode(y);
+                    LeafNode leafNode = new LeafNode();
+                    leafNode.setValue(obj.getString("value"));
+                    leafNode.setDescription(obj.getString("description"));
+                    SubNode subNode = new SubNode();
+                    subNode.setIteration(object.getInt("iteration"));
+                    subNode.setLeafNode(leafNode);
                 }
                     arrayList.add(azkar_model);
 
