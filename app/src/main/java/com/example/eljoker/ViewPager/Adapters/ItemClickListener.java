@@ -1,4 +1,4 @@
-package com.example.eljoker.zadelmuslim.Adapters;
+package com.example.eljoker.ViewPager.Adapters;
 
 import android.view.View;
 

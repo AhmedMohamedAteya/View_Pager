@@ -1,4 +1,4 @@
-package com.example.eljoker.zadelmuslim;
+package com.example.eljoker.ViewPager;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,10 +15,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.eljoker.zadelmuslim.Adapters.Adhkar_Adapter;
-import com.example.eljoker.zadelmuslim.Models.AzkarModel;
-import com.example.eljoker.zadelmuslim.Models.LeafNode;
-import com.example.eljoker.zadelmuslim.Models.SubNode;
+
+import com.example.eljoker.ViewPager.Adapters.Adhkar_Adapter;
+import com.example.eljoker.ViewPager.Models.AzkarModel;
+import com.example.eljoker.ViewPager.Models.LeafNode;
+import com.example.eljoker.ViewPager.Models.SubNode;
 
 import org.json.JSONArray;
 import org.json.JSONException;

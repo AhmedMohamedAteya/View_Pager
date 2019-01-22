@@ -1,5 +1,5 @@
 
-package com.example.eljoker.zadelmuslim;
+package com.example.eljoker.ViewPager;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +17,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.eljoker.zadelmuslim.Models.AzkarModel;
-import com.example.eljoker.zadelmuslim.Models.LeafNode;
+
+import com.example.eljoker.ViewPager.Models.AzkarModel;
+import com.example.eljoker.ViewPager.Models.LeafNode;
 
 import java.util.ArrayList;
 
@@ -74,7 +75,7 @@ public class Azkar_View_Pager extends AppCompatActivity {
     }
 
     public void back(View view) {
-        Intent intent = new Intent(this, com.example.eljoker.zadelmuslim.Azkar_Main.class);
+        Intent intent = new Intent(this, Azkar_Main.class);
         startActivity(intent);
     }
 

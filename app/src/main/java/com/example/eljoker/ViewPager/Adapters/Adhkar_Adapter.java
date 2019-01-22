@@ -1,4 +1,4 @@
-package com.example.eljoker.zadelmuslim.Adapters;
+package com.example.eljoker.ViewPager.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.eljoker.zadelmuslim.Azkar_View_Pager;
-import com.example.eljoker.zadelmuslim.Models.AzkarModel;
-import com.example.eljoker.zadelmuslim.Models.LeafNode;
-import com.example.eljoker.zadelmuslim.Models.SubNode;
-import com.example.eljoker.zadelmuslim.R;
+import com.example.eljoker.ViewPager.Azkar_View_Pager;
+import com.example.eljoker.ViewPager.Models.AzkarModel;
+import com.example.eljoker.ViewPager.Models.LeafNode;
+import com.example.eljoker.ViewPager.Models.SubNode;
+import com.example.eljoker.ViewPager.R;
 
 import java.util.ArrayList;
 
