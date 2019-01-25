@@ -1,33 +1,26 @@
 package com.example.eljoker.ViewPager;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 
 import com.example.eljoker.ViewPager.Adapters.Adhkar_Adapter;
 import com.example.eljoker.ViewPager.Models.AzkarModel;
-import com.example.eljoker.ViewPager.Models.LeafNode;
-import com.example.eljoker.ViewPager.Models.SubNode;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Azkar_Main extends AppCompatActivity
         //implements NavigationView.OnNavigationItemSelectedListener
@@ -40,8 +33,7 @@ public class Azkar_Main extends AppCompatActivity
     private DividerItemDecoration dividerItemDecoration;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.azkar_main);
 
@@ -51,52 +43,22 @@ public class Azkar_Main extends AppCompatActivity
         //get Azkar Name From Json
         ArrayList<AzkarModel> arrayList = new ArrayList<>();
         String json = null;
-        try
-        {
+        try {
             InputStream is = getAssets().open("Azkar.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        try
-        {
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i ++)
-            {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                AzkarModel azkar_model = new AzkarModel();
-                azkar_model.setName(jsonObject.getString("name"));
-                azkar_model.setId(jsonObject.getInt("id"));
+        Gson gson = new Gson();
+        ArrayList<AzkarModel> azkarModel = gson.fromJson(json, new TypeToken<List<AzkarModel>>() {}.getType());
 
-                JSONArray array = jsonObject.getJSONArray("subNodes");
-                int y = array.length();
-                for (int x = 0; x < y; x ++)
-                {
-                    JSONObject object = array.getJSONObject(x);
-                    JSONObject obj = object.getJSONObject("leafNode");
-                    LeafNode leafNode = new LeafNode();
-                    leafNode.setValue(obj.getString("value"));
-                    leafNode.setDescription(obj.getString("description"));
-                    SubNode subNode = new SubNode();
-                    subNode.setIteration(object.getInt("iteration"));
-                    subNode.setLeafNode(leafNode);
-                }
-                    arrayList.add(azkar_model);
-
-            }
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        Adhkar_Adapter adhkar_adapter = new Adhkar_Adapter(this, arrayList);
-
+        Adhkar_Adapter adhkar_adapter = new Adhkar_Adapter(this, azkarModel);
+        assert azkarModel != null;
+        Log.i(this.toString(), azkarModel.get(0).getSubNodes().size() + "");
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adhkar_adapter);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -196,7 +158,7 @@ public class Azkar_Main extends AppCompatActivity
                         R.id.search_src_text);
 *//*
 
-*/
+ */
 /*
         searchAutoComplete.setBackgroundColor(Color.BLUE);
         searchAutoComplete.setTextColor(Color.GREEN);
@@ -226,7 +188,7 @@ public class Azkar_Main extends AppCompatActivity
                 System.out.println("itemIndex == " + itemIndex);
                 *//*
 
-*/
+ */
 /*azkar_model azkar_model = new azkar_model();
                 Intent intent = new Intent(Azkar_Main.this, Azkar_View_Pager.class);
 
@@ -241,31 +203,31 @@ public class Azkar_Main extends AppCompatActivity
                 intent.putExtra("desc_autoComplete", desc_autoComplete);
                 intent.putExtra("itiration_autoComplete", itiration_autoComplete);
                 intent.putExtra("leafNode_autoComplete", leafNode_autoComplete);*//*
-*/
-/*
+ */
+    /*
 
 
-                *//*
+     *//*
 
-*/
+ */
 /*Bundle bundle = new Bundle();
 
                 bundle.putString("AutoComplete_name", adapterView.getItemAtPosition(itemIndex).toString());
                 bundle.putLong("_id", id);
                 intent.putExtras(bundle);*//*
-*/
+ */
 /*
 
                 //startActivity(intent);
 *//*
 
-*/
+ */
 /*
                 String queryString=(String)adapterView.getItemAtPosition(itemIndex);
                 searchAutoComplete.setText("" + queryString);
                 Toast.makeText(Azkar_Main.this, "you clicked " + queryString, Toast.LENGTH_LONG).show();
 *//*
-*/
+ */
 /*
 
             }

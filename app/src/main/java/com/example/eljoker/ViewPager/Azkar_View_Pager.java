@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ public class Azkar_View_Pager extends AppCompatActivity {
     private ViewPager mViewPager;
     ArrayList<AzkarModel> azkar_models;
     ArrayList<LeafNode> leafNodes;
-
+    AzkarModel azkarModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +39,22 @@ public class Azkar_View_Pager extends AppCompatActivity {
         azkar_models = new ArrayList<>();
         leafNodes = new ArrayList<>();
         Intent intent = getIntent();
+        // get Azkar moodel th\t we was send it from azkar adapter
+        azkarModel = intent.getParcelableExtra("azkar_model");
+        Log.i("azkarModel",azkarModel.getName());
 
         for (int i = 0; i < 10; i++) {
-            leafNodes.add(new LeafNode( intent.getStringExtra("value") + i,
-                    intent.getStringExtra("desc") + i));
+            String  description, value;
+            int iteration;
+            value = azkarModel.getSubNodes().get(i).getLeafNode().getValue();
+            description = azkarModel.getSubNodes().get(i).getLeafNode().getDescription();
+            iteration = azkarModel.getSubNodes().get(i).getIteration();
+            String value1 = value + "  Desc = " + description;
+            Bundle bundle = new Bundle();
+            bundle.putString("value", value);
+            bundle.putString("desc", description);
+            bundle.putInt("itiration", iteration);
+            Log.i("data", value1);
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), azkar_models);
 
@@ -100,34 +113,40 @@ public class Azkar_View_Pager extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_azkar__view__pager, container, false);
 
 
-            /*TextView azkar_View_Pager_title, txt_value, txt_description, txt_iteration;
+            TextView azkar_View_Pager_title, txt_value, txt_description, txt_iteration;
 
             azkar_View_Pager_title = rootView.findViewById(R.id.azkar_View_Pager_title);
             txt_value = rootView.findViewById(R.id.value);
             txt_description = rootView.findViewById(R.id.description);
             txt_iteration = rootView.findViewById(R.id.iteration);
 
-            String id, name, value, desc, itiration
-                   *//* name_autoComplete, value_autoComplete,
-                    desc_autoComplete, itiration_autoComplete*//*;
-            Intent intent = getActivity().getIntent();
+            String id, name, value, desc, itiration;
+            value = getArguments().getString("value");
+            desc = getArguments().getString("description");
+            itiration = getArguments().getString("value");
+            itiration = getArguments().getString("itiration");
+
+
+            //azkar_View_Pager_title.setText(name);
+            txt_value.setText(value);
+            txt_description.setText(desc);
+            txt_iteration.setText(itiration);
+
+            /*Intent intent = getActivity().getIntent();
             id = intent.getStringExtra("id");
             name = intent.getStringExtra("name");
             //value = intent.getStringExtra("value");
             value = getArguments().getString("value");
             desc = intent.getStringExtra("desc");
             itiration = intent.getStringExtra("itiration");
+*/
 
-            System.out.println("id ==" + id);
+            /*System.out.println("id ==" + id);
             System.out.println("name ==" + name);
             //System.out.println("value ==" + value);
             System.out.println("desc ==" + desc);
-            System.out.println("itiration ==" + itiration);
-            azkar_View_Pager_title.setText(name);
-            txt_value.setText(value);
-            txt_description.setText(desc);
-            txt_iteration.setText(itiration);
-*/
+            System.out.println("itiration ==" + itiration);*/
+
 
             return rootView;
         }
@@ -145,13 +164,19 @@ public class Azkar_View_Pager extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-
-            String value = leafNodes.get(position).getValue() + "  Desc = " + leafNodes.get(position).getDescription();
+            //Log.i("getItem",value1);
 
             PlaceholderFragment placeholderFragment = new PlaceholderFragment();
+/*
             Bundle bundle = new Bundle();
+            bundle.putString("value1", value1);
             bundle.putString("value", value);
-            placeholderFragment.setArguments(bundle);
+            bundle.putString("description", description);
+            bundle.putInt("iteration", iteration);
+*/
+
+
+            //placeholderFragment.setArguments(bundle);
 
             return placeholderFragment;
         }

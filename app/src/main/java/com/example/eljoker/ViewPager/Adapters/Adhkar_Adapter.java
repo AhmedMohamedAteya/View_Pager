@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eljoker.ViewPager.Azkar_View_Pager;
 import com.example.eljoker.ViewPager.Models.AzkarModel;
@@ -18,22 +20,19 @@ import com.example.eljoker.ViewPager.R;
 
 import java.util.ArrayList;
 
-public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder>
-{
+public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder> {
     Context cnx;
     ArrayList<AzkarModel> arrayList;
 
 
-    public Adhkar_Adapter(Context cnx, ArrayList<AzkarModel> arrayList)
-    {
+    public Adhkar_Adapter(Context cnx, ArrayList<AzkarModel> arrayList) {
         this.cnx = cnx;
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
-    {
+    public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(cnx);
         View v = inflater.inflate(R.layout.adhkar_row_item, viewGroup, false);
         Adhkar_Adapter.MyHolder holder = new Adhkar_Adapter.MyHolder(v);
@@ -41,15 +40,12 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyHolder viewHolder, final int position)
-    {
+    public void onBindViewHolder(@NonNull final MyHolder viewHolder, final int position) {
         final AzkarModel azkar_model = arrayList.get(position);
         viewHolder.azkar_txt.setText(azkar_model.getName());
-        viewHolder.azkar_favorite_border_img.setOnClickListener(new View.OnClickListener()
-        {
+        viewHolder.azkar_favorite_border_img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 viewHolder.azkar_favorite_border_img.setVisibility(View.GONE);
                 viewHolder.azkar_favorite_img.setVisibility(View.VISIBLE);
 
@@ -57,11 +53,9 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
             }
         });
 
-        viewHolder.azkar_favorite_img.setOnClickListener(new View.OnClickListener()
-        {
+        viewHolder.azkar_favorite_img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 viewHolder.azkar_favorite_border_img.setVisibility(View.VISIBLE);
                 viewHolder.azkar_favorite_img.setVisibility(View.GONE);
             }
@@ -69,38 +63,29 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
 
         //change fontSize
 
-        viewHolder.setItemClickListener(new ItemClickListener()
-        {
+        viewHolder.setItemClickListener(new ItemClickListener() {
             @Override
-            public void onClick(View view, int position)
-            {
+            public void onClick(View view, int position) {
 
                 Intent intent = new Intent(cnx, Azkar_View_Pager.class);
-                LeafNode leafNode = new LeafNode();
-                intent.putExtra("name", azkar_model.getName());
-                intent.putExtra("value", leafNode.getValue());
-                intent.putExtra("desc", leafNode.getDescription());
-                SubNode subNode = new SubNode();
-                intent.putExtra("itiration", subNode.getIteration());
+                // send azkar model to Azkar_View_Pager activity
+                intent.putExtra("azkar_model", azkar_model);
                 cnx.startActivity(intent);
             }
         });
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return arrayList.size();
     }
 
-    class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    {
+    class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView azkar_favorite_img, azkar_favorite_border_img;
         TextView azkar_txt;
         ItemClickListener itemClickListener;
 
-        public MyHolder(@NonNull View itemView)
-        {
+        public MyHolder(@NonNull View itemView) {
             super(itemView);
             azkar_favorite_img = itemView.findViewById(R.id.azkar_favorite_img);
             azkar_favorite_border_img = itemView.findViewById(R.id.azkar_favorite_border_img);
@@ -108,14 +93,12 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
             itemView.setOnClickListener(this);
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener)
-        {
+        public void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             itemClickListener.onClick(v, getAdapterPosition());
         }
 
