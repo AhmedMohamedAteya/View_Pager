@@ -39,7 +39,8 @@ public class SubNode implements Parcelable {
         dest.writeParcelable(this.leafNode, flags);
     }
 
-    public SubNode() {
+    public SubNode()
+    {
     }
 
     protected SubNode(Parcel in) {
