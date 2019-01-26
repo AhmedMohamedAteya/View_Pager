@@ -43,19 +43,11 @@ public class Azkar_View_Pager extends AppCompatActivity {
         azkarModel = intent.getParcelableExtra("azkar_model");
         Log.i("azkarModel",azkarModel.getName());
 
+/*
         for (int i = 0; i < 10; i++) {
-            String  description, value;
-            int iteration;
-            value = azkarModel.getSubNodes().get(i).getLeafNode().getValue();
-            description = azkarModel.getSubNodes().get(i).getLeafNode().getDescription();
-            iteration = azkarModel.getSubNodes().get(i).getIteration();
-            String value1 = value + "  Desc = " + description;
-            Bundle bundle = new Bundle();
-            bundle.putString("value", value);
-            bundle.putString("desc", description);
-            bundle.putInt("itiration", iteration);
-            Log.i("data", value1);
-        }
+            leafNodes.add(new LeafNode( intent.getStringExtra("value") + i,
+                    intent.getStringExtra("desc") + i));
+        }*/
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), azkar_models);
 
         // Set up the ViewPager with the sections adapter.
@@ -119,33 +111,9 @@ public class Azkar_View_Pager extends AppCompatActivity {
             txt_value = rootView.findViewById(R.id.value);
             txt_description = rootView.findViewById(R.id.description);
             txt_iteration = rootView.findViewById(R.id.iteration);
-
-            String id, name, value, desc, itiration;
-            value = getArguments().getString("value");
-            desc = getArguments().getString("description");
-            itiration = getArguments().getString("value");
-            itiration = getArguments().getString("itiration");
-
-
-            //azkar_View_Pager_title.setText(name);
-            txt_value.setText(value);
-            txt_description.setText(desc);
-            txt_iteration.setText(itiration);
-
-            /*Intent intent = getActivity().getIntent();
-            id = intent.getStringExtra("id");
-            name = intent.getStringExtra("name");
-            //value = intent.getStringExtra("value");
-            value = getArguments().getString("value");
-            desc = intent.getStringExtra("desc");
-            itiration = intent.getStringExtra("itiration");
-*/
-
-            /*System.out.println("id ==" + id);
-            System.out.println("name ==" + name);
-            //System.out.println("value ==" + value);
-            System.out.println("desc ==" + desc);
-            System.out.println("itiration ==" + itiration);*/
+            txt_value.setText(getArguments().getString("value"));
+            txt_description.setText(getArguments().getString("description"));
+            txt_iteration.setText(getArguments().getString("iteration"));
 
 
             return rootView;
@@ -164,29 +132,49 @@ public class Azkar_View_Pager extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            //Log.i("getItem",value1);
-
+            String  description, value;
+            int iteration;
+            value = azkarModel.getSubNodes().get(position).getLeafNode().getValue();
+            description = azkarModel.getSubNodes().get(position).getLeafNode().getDescription();
+            iteration = azkarModel.getSubNodes().get(position).getIteration();
+            String value1 = value + "  Desc = " + description;
+            Log.i("getItem",value1);
             PlaceholderFragment placeholderFragment = new PlaceholderFragment();
-/*
             Bundle bundle = new Bundle();
-            bundle.putString("value1", value1);
+            bundle.putString("value", value1);
             bundle.putString("value", value);
             bundle.putString("description", description);
             bundle.putInt("iteration", iteration);
-*/
 
-
-            //placeholderFragment.setArguments(bundle);
+            placeholderFragment.setArguments(bundle);
 
             return placeholderFragment;
         }
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             // Show 3 total pages.
-            Intent intent = getIntent();
-            int leafNode = intent.getIntExtra("leafNode",5);
-            return leafNode;
+
+            return leafNodes.size();
         }
     }
 }
+
+
+        /*for (int i = 0; i < 10; i++)
+
+        {
+        String description, value;
+        int iteration;
+        value = azkarModel.getSubNodes().get(i).getLeafNode().getValue();
+        description = azkarModel.getSubNodes().get(i).getLeafNode().getDescription();
+        iteration = azkarModel.getSubNodes().get(i).getIteration();
+        String value1 = value + "  Desc = " + description;
+        Bundle bundle = new Bundle();
+        bundle.putString("value", value);
+        bundle.putString("desc", description);
+        bundle.putInt("itiration", iteration);
+        Log.i("data", value1);
+        }
+*/
