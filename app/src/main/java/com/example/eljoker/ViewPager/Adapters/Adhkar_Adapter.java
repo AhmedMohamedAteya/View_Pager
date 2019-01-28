@@ -2,6 +2,7 @@ package com.example.eljoker.ViewPager.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -70,6 +71,7 @@ public class Adhkar_Adapter extends RecyclerView.Adapter<Adhkar_Adapter.MyHolder
                 Intent intent = new Intent(cnx, Azkar_View_Pager.class);
                 // send azkar model to Azkar_View_Pager activity
                 intent.putExtra("azkar_model", azkar_model);
+                intent.putExtra("name", azkar_model.getName());
                 cnx.startActivity(intent);
             }
         });

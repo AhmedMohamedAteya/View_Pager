@@ -59,6 +59,8 @@ public class Azkar_Main extends AppCompatActivity
         Adhkar_Adapter adhkar_adapter = new Adhkar_Adapter(this, azkarModel);
         assert azkarModel != null;
         Log.i(this.toString(), azkarModel.get(0).getSubNodes().size() + "");
+        System.out.println("print" + azkarModel.get(0).getSubNodes().size() + "");
+
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adhkar_adapter);
         linearLayoutManager = new LinearLayoutManager(this);

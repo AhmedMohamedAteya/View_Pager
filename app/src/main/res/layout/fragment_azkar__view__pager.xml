@@ -103,31 +103,54 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/zekr_times"
-                android:layout_marginRight="@dimen/_5sdp"
+                android:id="@+id/allViews"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_18sdp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/zekr_from_to"
+                android:layout_marginStart="@dimen/_70sdp"
+                android:id="@+id/currentPosition"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginStart="@dimen/_25sdp"
+                android:text="من"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+            <TextView
+                android:id="@+id/itiration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_18sdp"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/_10sdp" />
+                android:layout_marginRight="@dimen/_60sdp" />
 
             <ImageView
+                android:id="@+id/counter_img"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:layout_centerHorizontal="true"
@@ -135,13 +158,24 @@
 
             <TextView
                 android:layout_centerVertical="true"
-                android:id="@+id/iteration"
+                android:id="@+id/counter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/counter_vis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+
 
 
         </RelativeLayout>
