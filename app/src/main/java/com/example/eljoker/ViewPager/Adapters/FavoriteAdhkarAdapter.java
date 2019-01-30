@@ -1,4 +1,4 @@
-package com.example.eljoker.zadelmuslim.Adapters;
+package com.example.eljoker.ViewPager.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.eljoker.zadelmuslim.DataBase;
+import com.example.eljoker.ViewPager.DataBase;
+import com.example.eljoker.ViewPager.R;
 import com.example.eljoker.zadelmuslim.Models.FavModel;
-import com.example.eljoker.zadelmuslim.R;
-import com.example.eljoker.zadelmuslim.Settings;
 
 import java.util.ArrayList;
 
@@ -53,15 +52,6 @@ public class FavoriteAdhkarAdapter extends RecyclerView.Adapter<FavoriteAdhkarAd
         System.out.println("favName " + favName);
 
 
-        //change fontSize
-        int fontSize = Settings.getFontSize(cnx);
-        Settings.updateTextSize(myHolder.rl_favorites , fontSize);
-
-
-        //change fontType
-        Typeface fontType = Typeface.createFromAsset(cnx.getAssets(),Settings.getFontType(cnx));
-        Settings.updateTextType(myHolder.rl_favorites,fontType);
-
         myHolder.favorite_img.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -71,12 +61,6 @@ public class FavoriteAdhkarAdapter extends RecyclerView.Adapter<FavoriteAdhkarAd
                 myHolder.favorite_img.setVisibility(View.GONE);
 
                 DataBase db = new DataBase(cnx);
-
-                // deleting the note from db
-                //db.removeFromFavorite(arrayList.get(position));
-
-                // removing the note from the list
-                //arrayList.remove(position);
 
                 db.removeFromFavorite(favName);
             }

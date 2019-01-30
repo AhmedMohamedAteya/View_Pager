@@ -1,4 +1,4 @@
-package com.example.eljoker.zadelmuslim;
+package com.example.eljoker.ViewPager;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.eljoker.zadelmuslim.Adapters.FavoriteAdhkarAdapter;
+import com.example.eljoker.ViewPager.Adapters.FavoriteAdhkarAdapter;
 import com.example.eljoker.zadelmuslim.Models.FavModel;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class Favorite_Azkar extends AppCompatActivity
 
     public void back(View view)
     {
-        Intent intent = new Intent(this, AzkarMain.class);
+        Intent intent = new Intent(this, Azkar_Main.class);
         startActivity(intent);
     }
 }
